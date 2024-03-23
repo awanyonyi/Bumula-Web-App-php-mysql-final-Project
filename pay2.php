@@ -1,13 +1,14 @@
 <?php
-	$host = "localhost";
-	$user = "root";
-	$pass = "";
-	$db = "osms";
-	
-	$conn = new mysqli($host, $user, $pass, $db);
-	if($conn->connect_error){
-		echo "Failed:" . $conn->connect_error;
-	}
+$host = "localhost";
+$user = "root";
+$pass = "Allanware5895";
+$db_name = "william";
+
+$conn = new mysqli($host, $user, $pass, $db_name);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,7 +103,7 @@
 		</div>
 
 		<div class="copyrights wrapper">
-			Copyright &copy; <?php echo date("Y")?> All Rights Reserved | Designed by James Muriira.
+			Copyright &copy; <?php echo date("Y")?> All Rights Reserved | Designed by Allan Wanyonyi.
 		</div>
 	</footer><!--  end footer  -->
 	

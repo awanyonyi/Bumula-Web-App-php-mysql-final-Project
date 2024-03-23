@@ -61,7 +61,7 @@
 					<a href="index.php"><button type="submit" class="btn" name="back">Back</button></a>
 				</div>
 				<p>
-					Not yet a member? <a href="register.php">Sign up</a>
+					Not yet a member? <a href="Register.php">Sign up</a>
 				</p>
 		   </form>
 

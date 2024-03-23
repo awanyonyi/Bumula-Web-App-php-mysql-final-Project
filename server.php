@@ -2,7 +2,7 @@
 	<?php
 	$host = "localhost";
 	$username = "root";
-	$password = "";
+	$password = "Allanware5895";
 	$db_name = "registration";
 	
 	// Create a MySQLi connection

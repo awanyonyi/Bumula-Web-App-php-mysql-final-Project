@@ -173,9 +173,9 @@ CREATE TABLE IF NOT EXISTS `notification` (
 --
 
 INSERT INTO `notification` (`notification_id`, `NAME`, `STATUS`, `DEADLINE`) VALUES
-(2, 'Regular', 'Open', '2018-08-02'),
-(3, '2018 CDF', 'Open', '2018-07-30'),
-(4, '2018 County', 'Open', '2018-08-06');
+(2, 'Regular', 'Open', '2024-02-08'),
+(3, '2024 CDF', 'Open', '2024-01-30'),
+(4, '2024 County', 'Open', '2024-01-06');
 
 -- --------------------------------------------------------
 

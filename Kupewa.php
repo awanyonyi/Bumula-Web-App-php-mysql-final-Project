@@ -1,13 +1,15 @@
 <?php
-$host="localhost";
-		$uname="root";
-		$pas="";
-		$db_name="osms";
-		$tbl_name="donate";
-		
-		@mysql_connect("$host","$uname","$pas") or die ("cannot connect");
-		mysql_select_db("$db_name") or die ("cannot select db");
-		?>
+$host = "localhost";
+$user = "root";
+$pass = "Allanware5895";
+$db_name = "william";
+
+$conn = new mysqli($host, $user, $pass, $db_name);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+?>
 <?php
 if (isset($_POST['register'])){
 $First_Name = $_POST['first'];

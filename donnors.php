@@ -4,15 +4,16 @@
 </head>
 <body bgcolor="WHITE">
 <?php
+$host = "localhost";
+$user = "root";
+$pass = "Allanware5895";
+$db_name = "william";
 
-$host="localhost";
-		$uname="root";
-		$pas="";
-		$db_name="osms";
-		$tbl_name="donor";
-		
-		@mysql_connect("$host","$uname","$pas") or die ("cannot connect");
-		mysql_select_db("$db_name") or die ("cannot select db");
+$conn = new mysqli($host, $user, $pass, $db_name);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 ?>
 <?php
 	include "dbconn.php";
