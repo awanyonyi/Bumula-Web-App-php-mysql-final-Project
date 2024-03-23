@@ -11,14 +11,14 @@ $conn = new mysqli($host, $user, $pass, $db_name);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+// Initialize variables
+$F_Name = isset($_POST['F_Name']) ? $_POST['F_Name'] : '';
+$L_Name = isset($_POST['L_Name']) ? $_POST['L_Name'] : '';
+$U_Name = isset($_POST['U_Name']) ? $_POST['U_Name'] : '';
+$P_Word1 = isset($_POST['P_Word1']) ? $_POST['P_Word1'] : '';
+$P_Word2 = isset($_POST['P_Word2']) ? $_POST['P_Word2'] : '';
 
 if (isset($_POST['register'])) {
-    $F_Name = $_POST['F_Name'];
-    $L_Name = $_POST['L_Name'];
-    $U_Name = $_POST['U_Name'];
-    $P_Word1 = $_POST['P_Word1'];
-    $P_Word2 = $_POST['P_Word2'];
-
     // Validate if the passwords match
     if ($P_Word1 != $P_Word2) {
         echo "<script>
@@ -52,12 +52,6 @@ if (isset($_POST['register'])) {
         mysqli_close($link);
     }
 } else {
-    $F_Name = $_POST['F_Name'];
-    $L_Name = $_POST['L_Name'];
-    $U_Name = $_POST['U_Name'];
-    $P_Word1 = $_POST['P_Word1'];
-    $P_Word2 = $_POST['P_Word2'];
-
     // Insert data into database
     $sql = "INSERT INTO apply (column1, column2) VALUES ('$F_Name', '$L_Name')";
     if ($conn->query($sql) === TRUE) {
