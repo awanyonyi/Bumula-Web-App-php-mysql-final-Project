@@ -76,28 +76,37 @@ include('dbconn.php');
 								
 									
 					</form
-								<?php
+                    <?php
+if (isset($_POST['login'])) {
+    $UserName = $_POST['UserName'];
+    $Password = $_POST['Password'];
 
-if (isset($_POST['login'])){
+    try {
+        // Prepare the query
+        $stmt = $pdo->prepare("SELECT * FROM staff WHERE email = :email AND id_no = :id_no");
+        $stmt->bindParam(':email', $UserName);
+        $stmt->bindParam(':id_no', $Password);
+        $stmt->execute();
 
-$UserName=$_POST['UserName'];
-$Password=$_POST['Password'];
+        // Fetch the result
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$login_query=mysql_query("select * from staff where email='$UserName' and id_no='$Password'");
-$count=mysql_num_rows($login_query);
-$row=mysql_fetch_array($login_query);
-
-
-if ($count > 0){
-session_start();
-$_SESSION['id']=$row['staff_id'];
-$_SESSION['email']=$UserName;
-header('location:Students.php');
-}else{
-	header('location:dreg.php');
-}
+        if ($row) {
+            session_start();
+            $_SESSION['id'] = $row['staff_id'];
+            $_SESSION['email'] = $UserName;
+            header('location: Students.php');
+        } else {
+            header('location: dreg.php');
+        }
+    } catch (PDOException $e) {
+        // Log the error message
+        error_log("Error executing query: " . $e->getMessage());
+        die("An error occurred. Please check the logs for details.");
+    }
 }
 ?>
+
                              </div>
 
                         </div>

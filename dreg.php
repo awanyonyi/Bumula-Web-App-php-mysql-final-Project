@@ -4,8 +4,10 @@ $user = "root";
 $pass = "Allanware5895";
 $db_name = "william";
 
+// Create a MySQLi connection
 $conn = new mysqli($host, $user, $pass, $db_name);
 
+// Check if the connection was successful
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -42,11 +44,24 @@ if ($conn->connect_error) {
 		<div class="wrapper">
 			<ul class="properties_list">
 			<?php
-						
-						$sel = "SELECT * FROM apply WHERE id = '$_GET[id]'";
-						$rs = $conn->query($sel);
-						$rws = $rs->fetch_assoc();
-			?>
+// Assuming you have already established a mysqli connection
+// with the variable name "$conn"
+
+// Create a PDO connection using the same database credentials
+// Replace the placeholders with your actual database details
+$db_host = "localhost";
+$db_name = "william";
+$db_user = "root";
+$db_pass = "Allanware5895";
+
+try {
+    $pdo_conn = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
+    echo "PDO connection created successfully.";
+} catch (PDOException $e) {
+    echo "Error creating PDO connection: " . $e->getMessage();
+}
+?>
+
 				
 				
 				
@@ -85,30 +100,50 @@ if ($conn->connect_error) {
 				</form>
 				
 				<?php
-						if(isset($_POST['save'])){
-							$fname = $_POST['fname'];
-							$id_no = $_POST['id_no'];
-							$gender = $_POST['gender'];
-							$email = $_POST['email'];
-							$phone = $_POST['phone'];
-							
-							$qry = "INSERT INTO staff (fname,id_no,gender,email,phone,status)
-							VALUES('$fname','$id_no','$gender','$email','$phone','Confirmed')";
-							$result = $conn->query($qry);
-							if($result == TRUE){
-								echo "<script type = \"text/javascript\">
-											alert(\"Successfully Registered. Proceed to Login\");
-											window.location = (\"donorlog.php\")
-											</script>";
-							} else{
-								echo "<script type = \"text/javascript\">
-											alert(\"Registration Failed. Try Again\");
-											window.location = (\"dreg.php\")
-											</script>";
-							}
-						}
-						
-					  ?>
+if (isset($_POST['save'])) {
+    $fname = $_POST['fname'];
+    $id_no = $_POST['id_no'];
+    $gender = $_POST['gender'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+
+    try {
+        // Create a PDO connection (assuming you've already established it)
+        $pdo = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Prepare the query
+        $stmt = $pdo->prepare("INSERT INTO staff (fname, id_no, gender, email, phone, status)
+                              VALUES (:fname, :id_no, :gender, :email, :phone, 'Confirmed')");
+        $stmt->bindParam(':fname', $fname);
+        $stmt->bindParam(':id_no', $id_no);
+        $stmt->bindParam(':gender', $gender);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':phone', $phone);
+        $stmt->execute();
+
+        // Check if the query was successful
+        if ($stmt->rowCount() > 0) {
+            echo "<script type=\"text/javascript\">
+                    alert(\"Successfully Registered. Proceed to Login\");
+                    window.location = (\"donorlog.php\");
+                  </script>";
+        } else {
+            echo "<script type=\"text/javascript\">
+                    alert(\"Registration Failed. Try Again\");
+                    window.location = (\"dreg.php\");
+                  </script>";
+        }
+    } catch (PDOException $e) {
+        // Log the error message
+        error_log("Error executing query: " . $e->getMessage());
+        die("An error occurred. Please check the logs for details.");
+    }
+}
+?>
+
+
+
 			</ul>
 		</div>
 	</section>	<!--  end listing section  -->

@@ -41,8 +41,8 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `firstname`, `lastname`, `username`, `password`, `adminthumbnails`) VALUES
-(1, 'James', 'Muriira', 'admin', 'admin', 'uploads/admin.jpg'),
-(2, 'admin', 'admin', 'master', '1234', 'images/NO-IMAGE-AVAILABLE.jpg');
+(1, 'Allan', 'Wanyonyi', 'allanware', 'allanware123', 'images/allanware.png'),
+(2, 'Mikel', 'Arteta', 'vamos', 'vamos234', 'images/arteta.jpg');
 
 -- --------------------------------------------------------
 

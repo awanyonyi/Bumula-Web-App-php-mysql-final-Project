@@ -70,8 +70,8 @@
 				if(isset($_POST['log'])){
 					$UserName=$_POST['UserName'];
 					$Password=$_POST['Password'];
-					$qy = "SELECT * FROM apply WHERE U_Name='$UserName' and P_Word='$Password'";
-					$log = $conn->query($qy);
+					$sql = "SELECT * FROM apply WHERE U_Name='$UserName' and P_Word='$Password'";
+					$log = $conn->query($sql);
 					$num = $log->num_rows;
 					$row = $log->fetch_assoc();
 					if($num > 0){

@@ -90,12 +90,12 @@ margin-right:20px;
         <label class="col-lg-2 control-label" for="uemail">Ward</label>
               <div class="col-lg-6">
                 <select name="ward">
-                  <option value="kiminini">Kiminini</option>
-                  <option value="Waitaluk">Waitaluk</option>
-                  <option value="Sirende">Sirende</option>
-                  <option value="Hospital">Hospital</option>
-                  <option value="Sikhendu">Sikhendu</option>
-                  <option value="Nabiswa">Nabiswa</option>      
+                  <option value="Bumula">Bumula</option>
+                  <option value="Khasoko">Khasoko</option>
+                  <option value="Kabula">Kabula</option>
+                  <option value="South Bukusu">South Bukusu</option>
+                  <option value="Siboti">Siboti</option>
+                  <option value="Kimaeti">Kimaeti</option>      
                 </select>
               </div>
         </div>

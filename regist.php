@@ -30,8 +30,8 @@ if (isset($_POST['register'])) {
         $link = mysqli_connect("localhost", "root", "Allanware5895", "william");
 
         // Validate the user credentials using prepared statement
-        $sql = "SELECT * FROM student WHERE U_Name = ? AND P_Word = ?";
-        $stmt = mysqli_prepare($link, $sql);
+        $Pdo = "SELECT * FROM student WHERE U_Name = ? AND P_Word = ?";
+        $stmt = mysqli_prepare($link, $Pdo);
         mysqli_stmt_bind_param($stmt, "ss", $U_Name, $P_Word1);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
@@ -53,14 +53,14 @@ if (isset($_POST['register'])) {
     }
 } else {
     // Insert data into database
-    $sql = "INSERT INTO apply (column1, column2) VALUES ('$F_Name', '$L_Name')";
-    if ($conn->query($sql) === TRUE) {
+    $Pdo = "INSERT INTO apply (column1, column2) VALUES ('$F_Name', '$L_Name')";
+    if ($Pdo->query($Pdo) === TRUE) {
         echo "New record created successfully";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $Pdo . "<br>" . $Pdo->error;
     }
 }
 
 // Close the connection
-$conn->close();
+$Pdo->close();
 

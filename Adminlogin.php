@@ -75,27 +75,39 @@ include('dbconn.php');
 									</p>
                                 </div></form
 								<?php
+$host = "localhost";
+$username = "root";
+$password = "Allanware5895";
+$db_name = "william";
 
-if (isset($_POST['login'])){
+try {
+    // Create a PDO connection
+    $pdo = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$UserName=$_POST['UserName'];
-$Password=$_POST['Password'];
+    // Prepare and execute the query
+    $stmt = $pdo->prepare("SELECT * FROM admin WHERE username = :username AND password = :password");
+    $stmt->bindParam(':username', $UserName);
+    $stmt->bindParam(':password', $Password);
+    $stmt->execute();
 
-$login_query=mysql_query("select * from admin where username='$UserName' and password='$Password'");
-$count=mysql_num_rows($login_query);
-$row=mysql_fetch_array($login_query);
+    // Fetch the result
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
-if ($count > 0){
-session_start();
-$_SESSION['id']=$row['admin_id'];
-$_SESSION['U_Name']=$UserName;
-header('location:admin/dashboard.php');
-}else{
-	header('location:Adminlogin.php');
+    if ($row) {
+        session_start();
+        $_SESSION['id'] = $row['admin_id'];
+        $_SESSION['U_Name'] = $UserName;
+        header('location:admin/dashboard.php');
+    } else {
+        echo "Invalid login credentials. Please try again.";
+    }
+} catch (PDOException $e) {
+    // Log the error message
+    error_log("Connection failed: " . $e->getMessage());
+    die("Connection failed. Please check the logs for details.");
 }
-}
-?>                        </div>
+?>
 
                         </div>
                     </div>
@@ -176,7 +188,7 @@ header('location:admin/dashboard.php');
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-                   <center>Alrights Reserved 2018</center>
+                   <center>Alrights Reserved 2024</center>
                 </div>
             </div>
 
